@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriHive Clinic - Book an Appointment</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body { 
+            margin: 0px; 
+            font: 16px Arial, sans-serif; 
+            color: #18352d; 
+            background: #fffdf4; 
+        }
+
+        html { 
+            scroll-padding-top: 80px; 
+        }
+
+        nav { 
+            position: sticky; 
+            top: 0px; 
+            z-index: 100; 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center; 
+            gap: 4px; 
+            margin: 12px; 
+            padding: 4px 8px; 
+            background: #f4e6a2; 
+            border-radius: 12px; 
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2); 
+        }
+
+        nav a { 
+            display: block; 
+            padding: 10px 14px; 
+            border-radius: 8px; 
+            color: #18352d; 
+            text-decoration: none; 
+        }
+
+        nav a:hover, nav a:focus { 
+            background: #e8cf69; 
+        }
+
+        .dropdown { 
+            position: relative; 
+        }
+
+.dropdown-label::after {
+            content: " ▼";
+            font-size: 12px;
+        }
+
+.dropdown-menu {
+            display: flex;
+            position: absolute;
+            top: 38px;
+            left: 0px;
+            min-width: 140px;
+            flex-direction: column;
+            background: #f4e6a2;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .dropdown-menu a { 
+            white-space: nowrap; 
+        }
+
+.dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0px);
+            pointer-events: auto;
+        }
+
+        .appointment { 
+            margin-left: auto; 
+        }
+
+        @media (max-width: 520px) { 
+            nav { margin: 8px; padding: 4px; } 
+            .appointment { margin-left: 0px; } 
+        }
+
+        /* page heading */
+        h1, h2 {
+            text-align: center;
+        }
+
+        hr {
+            border: 1px solid #e8cf69;
+        }
+
+        /* the box that holds the form */
+        .form-box {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f4e6a2;
+            border: 2px solid #18352d;
+            border-radius: 12px;
+        }
+
+        .form-box h3 {
+            margin: 10px 0px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        input, select, textarea {
+            max-width: 100%;
+            padding: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #18352d;
+            background: #fffdf4;
+            border: 1px solid #18352d;
+            border-radius: 6px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 3px solid #e8cf69;
+            outline-offset: 1px;
+        }
+
+        .consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .consent input {
+            margin-top: 4px;
+        }
+
+        .validation-message {
+            display: none;
+            margin-top: 16px;
+            padding: 10px;
+            border-radius: 6px;
+            white-space: pre-line;
+        }
+
+        .validation-message.error,
+        .validation-message.success {
+            display: block;
+        }
+
+        .validation-message.error {
+            color: #821919;
+            background: #fff0f0;
+            border: 1px solid #821919;
+        }
+
+        .validation-message.success {
+            color: #18352d;
+            background: #e8f1d4;
+            border: 1px solid #18352d;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            color: #fffdf4;
+            background: #18352d;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="reset"] {
+            padding: 10px 20px;
+            background: #e8cf69;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background: #2c5a4b;
+        }
+
+        a {
+            color: #18352d;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <a href="../practicum%2014/index.html#home">Home</a>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#podcast">Nutrition Resources</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#podcast">Diet Tips Audio</a>
+                <a href="../practicum%2014/index.html#video">Recipe Video</a>
+                <a href="../practicum%2014/index.html#chart">Diet Chart</a>
+                <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#business">Business</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#business">Business Inquiries</a>
+                <a href="../practicum%2014/index.html#partnerships">Partnership Opportunities</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#advertise">Advertising</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#advertise">Advertise With Us</a>
+                <a href="../practicum%2014/index.html#sponsorship">Sponsorships</a>
+            </div>
+        </div>
+        <a href="../practicum%2014/index.html#quiz">Quiz</a>
+        <a href="../practicum%2014/index.html#location">Clinic</a>
+        <a href="../practicum%2012/dashboard.html">Dashboard</a>
+        <a href="../practicum%2015/tasks.html">Tasks</a>
+        <a href="../practicum%208/gallery.html">Gallery</a>
+        <a class="appointment" href="../practicum%2011/appointment.html">Book Appointment</a>
+        <a class="login" href="../practicum%2011/login.html">Log In</a>
+        <button class="mode-toggle" type="button" onclick="Mode()" aria-pressed="false">Dark Mode</button>
+    </nav>
+
+    <h1>NutriHive Clinic</h1>
+    <h2>Book an Appointment</h2>
+    <hr>
+
+    <div class="form-box">
+    <form id="appointmentForm" action="appointment_submit.php" method="post" novalidate>
+        <h3>Personal Information</h3>
+        <hr>
+        <table>
+        <tr><td><label for="fname">First Name:</label></td>
+        <td><input type="text" id="fname" name="fname" placeholder="Enter your first name here" required></td></tr>
+
+        <tr><td><label for="lname">Last Name:</label></td>
+        <td><input type="text" id="lname" name="lname" placeholder="Enter your last name here" required></td></tr>
+
+        <tr><td><label for="DOB">Date of Birth:</label></td>
+        <td><input type="date" id="DOB" name="DOB" required></td></tr>
+        </table>
+
+        <h3>Appointment Details</h3>
+        <hr>
+        <table>
+        <tr><td><label for="apptdate">Preferred Date:</label></td>
+        <td><input type="date" id="apptdate" name="apptdate" required></td></tr>
+
+        <tr><td><label for="appttime">Preferred Time:</label></td>
+        <td><input type="time" id="appttime" name="appttime" required></td></tr>
+
+        <tr><td><label for="reason">Reason for Visit:</label></td>
+        <td><select name="reason" id="reason" required>
+            <option value="" selected disabled>Choose a reason</option>
+            <option value="general">General Nutrition Consultation</option>
+            <option value="weight">Weight Management</option>
+            <option value="diabetic">Diabetic Diet Plan</option>
+            <option value="sports">Sports Nutrition</option>
+            <option value="recovery">Post-Surgery Recovery Diet</option>
+            <option value="other">Other</option>
+        </select></td></tr>
+
+        <tr><td><label for="nutritionist">Preferred Nutritionist:</label></td>
+        <td><select name="nutritionist" id="nutritionist">
+            <option value="any">Any Available</option>
+            <option value="denis">Dr. Dennis</option>
+            <option value="jeri">Dr. Jeri</option>
+        </select></td></tr>
+        </table>
+
+        <h3>Contact Information</h3>
+        <hr>
+        <table>
+        <tr><td><label for="Phone">Phone Number:</label></td>
+        <td><input type="tel" inputmode="numeric" id="Phone" name="Phone" placeholder="10-digit phone number" pattern="[0-9]{10}" maxlength="10" required></td></tr>
+
+        <tr><td><label for="email">Email Address:</label></td>
+        <td><input type="email" id="email" name="email" placeholder="Enter your email address" required></td></tr>
+
+        <tr><td><label for="splreq">Additional Notes:</label></td>
+        <td><textarea id="splreq" name="splreq" rows="4" cols="30" placeholder="Any allergies, conditions, or special requests"></textarea></td></tr>
+        </table>
+
+        <p class="consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I confirm that the information above is correct.</label>
+        </p>
+
+        <br>
+        <input type="reset" value="Clear Form">
+        <input type="submit" value="Book Appointment">
+        <div id="formMessage" class="validation-message" role="status" aria-live="polite"></div>
+    </form>
+    </div>
+
+    <p class="center-text">Already have an account? <a href="../practicum%2011/login.html">Login here</a></p>
+
+    <script>
+        const form = document.getElementById("appointmentForm");
+        const message = document.getElementById("formMessage");
+        const dobInput = document.getElementById("DOB");
+        const appointmentDateInput = document.getElementById("apptdate");
+
+        // Use the local date so the date limit matches the user's calendar.
+        const today = new Date();
+        const todayString =
+            today.getFullYear() + "-" +
+            String(today.getMonth() + 1).padStart(2, "0") + "-" +
+            String(today.getDate()).padStart(2, "0");
+
+        dobInput.max = todayString;
+        appointmentDateInput.min = todayString;
+
+        // Change these limits if your instructor gives a different age range.
+        const MIN_AGE = 1;
+        const MAX_AGE = 120;
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const errors = [];
+            const firstName = document.getElementById("fname").value.trim();
+            const lastName = document.getElementById("lname").value.trim();
+            const dobValue = dobInput.value;
+            const appointmentDate = appointmentDateInput.value;
+            const appointmentTime = document.getElementById("appttime").value;
+            const reason = document.getElementById("reason").value;
+            const phone = document.getElementById("Phone").value.trim();
+            const email = document.getElementById("email");
+            const consent = document.getElementById("consent").checked;
+
+            if (firstName === "") {
+                errors.push("Enter your first name.");
+            }
+
+            if (lastName === "") {
+                errors.push("Enter your last name.");
+            }
+
+            if (dobValue === "") {
+                errors.push("Enter your date of birth.");
+            } else {
+                const birthDate = new Date(dobValue + "T00:00:00");
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDifference = today.getMonth() - birthDate.getMonth();
+
+                if (monthDifference < 0 ||
+                    (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+
+                if (age < MIN_AGE || age > MAX_AGE) {
+                    errors.push("Age must be between " + MIN_AGE + " and " + MAX_AGE + ".");
+                }
+            }
+
+            if (appointmentDate === "" || appointmentDate < todayString) {
+                errors.push("Choose today or a future appointment date.");
+            }
+
+            if (appointmentTime === "") {
+                errors.push("Choose an appointment time.");
+            }
+
+            if (reason === "") {
+                errors.push("Choose a reason for your visit.");
+            }
+
+            if (!/^[0-9]{10}$/.test(phone)) {
+                errors.push("Enter a 10-digit phone number using numbers only.");
+            }
+
+            if (email.value.trim() === "" || !email.checkValidity()) {
+                errors.push("Enter a valid email address.");
+            }
+
+            if (!consent) {
+                errors.push("Check the confirmation box.");
+            }
+
+            if (errors.length > 0) {
+                message.className = "validation-message error";
+                message.textContent = "Please fix these items:\n" +
+                    errors.map(function (error, index) {
+                        return (index + 1) + ". " + error;
+                    }).join("\n");
+                return;
+            }
+
+            message.className = "validation-message success";
+            message.textContent =
+                "All 10 validation checks passed. This practice page does not send or save your data.";
+        });
+
+        form.addEventListener("reset", function () {
+            message.className = "validation-message";
+            message.textContent = "";
+        });
+    </script>
+    <script src="../js/site.js"></script>
+</body>
+</html>

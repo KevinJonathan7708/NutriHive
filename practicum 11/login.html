@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriHive Clinic - Patient Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body { 
+            margin: 0px; 
+            font: 16px Arial, sans-serif; 
+            color: #18352d; 
+            background: #fffdf4; 
+        }
+
+        html { 
+            scroll-padding-top: 80px; 
+        }
+
+        nav { 
+            position: sticky; 
+            top: 0px; 
+            z-index: 100; 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center; 
+            gap: 4px; 
+            margin: 12px; 
+            padding: 4px 8px; 
+            background: #f4e6a2; 
+            border-radius: 12px; 
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2); 
+        }
+
+        nav a { 
+            display: block; 
+            padding: 10px 14px; 
+            border-radius: 8px; 
+            color: #18352d; 
+            text-decoration: none; 
+        }
+
+        nav a:hover, nav a:focus { 
+            background: #e8cf69; 
+        }
+
+        .dropdown { 
+            position: relative; 
+        }
+
+.dropdown-label::after {
+            content: " ▼";
+            font-size: 12px;
+        }
+
+.dropdown-menu {
+            display: flex;
+            position: absolute;
+            top: 38px;
+            left: 0px;
+            min-width: 140px;
+            flex-direction: column;
+            background: #f4e6a2;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .dropdown-menu a { 
+            white-space: nowrap; 
+        }
+
+.dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0px);
+            pointer-events: auto;
+        }
+
+        .appointment { 
+            margin-left: auto; 
+        }
+
+        @media (max-width: 520px) { 
+            nav { margin: 8px; padding: 4px; } 
+            .appointment { margin-left: 0px; } 
+        }
+
+        /* page heading */
+        h1, h2 {
+            text-align: center;
+        }
+
+        hr {
+            border: 1px solid #e8cf69;
+        }
+
+        /* the box that holds the form */
+        .form-box {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f4e6a2;
+            border: 2px solid #18352d;
+            border-radius: 12px;
+        }
+
+        .form-box h3 {
+            margin: 10px 0px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        input, select, textarea {
+            max-width: 100%;
+            padding: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #18352d;
+            background: #fffdf4;
+            border: 1px solid #18352d;
+            border-radius: 6px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 3px solid #e8cf69;
+            outline-offset: 1px;
+        }
+
+        .consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .consent input {
+            margin-top: 4px;
+        }
+
+        .validation-message {
+            display: none;
+            margin-top: 16px;
+            padding: 10px;
+            border-radius: 6px;
+            white-space: pre-line;
+        }
+
+        .validation-message.error,
+        .validation-message.success {
+            display: block;
+        }
+
+        .validation-message.error {
+            color: #821919;
+            background: #fff0f0;
+            border: 1px solid #821919;
+        }
+
+        .validation-message.success {
+            color: #18352d;
+            background: #e8f1d4;
+            border: 1px solid #18352d;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            color: #fffdf4;
+            background: #18352d;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="reset"] {
+            padding: 10px 20px;
+            background: #e8cf69;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background: #2c5a4b;
+        }
+
+        a {
+            color: #18352d;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <a href="../practicum%2014/index.html#home">Home</a>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#podcast">Nutrition Resources</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#podcast">Diet Tips Audio</a>
+                <a href="../practicum%2014/index.html#video">Recipe Video</a>
+                <a href="../practicum%2014/index.html#chart">Diet Chart</a>
+                <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#business">Business</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#business">Business Inquiries</a>
+                <a href="../practicum%2014/index.html#partnerships">Partnership Opportunities</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#advertise">Advertising</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#advertise">Advertise With Us</a>
+                <a href="../practicum%2014/index.html#sponsorship">Sponsorships</a>
+            </div>
+        </div>
+        <a href="../practicum%2014/index.html#quiz">Quiz</a>
+        <a href="../practicum%2014/index.html#location">Clinic</a>
+        <a href="../practicum%2012/dashboard.html">Dashboard</a>
+        <a href="../practicum%2015/tasks.html">Tasks</a>
+        <a href="../practicum%208/gallery.html">Gallery</a>
+        <a class="appointment" href="../practicum%2011/appointment.html">Book Appointment</a>
+        <a class="login" href="../practicum%2011/login.html">Log In</a>
+        <button class="mode-toggle" type="button" onclick="Mode()" aria-pressed="false">Dark Mode</button>
+    </nav>
+
+    <h1>NutriHive Clinic</h1>
+    <h2>Patient Login</h2>
+    <hr>
+
+    <div class="form-box">
+    <form id="loginForm" novalidate>
+        <table>
+        <tr><td><label for="username">Email / Username:</label></td>
+        <td><input type="text" id="username" placeholder="Enter your email or username"></td></tr>
+        <tr><td><label for="password">Password:</label></td>
+        <td><input type="password" id="password" placeholder="Enter your password"></td></tr>
+        </table>
+        <br>
+        <input type="reset" value="Clear Form">
+        <input type="submit" value="Login">
+        <div id="formMessage" class="validation-message" role="status" aria-live="polite"></div>
+    </form>
+    </div>
+
+    <p class="center-text">New patient? <a href="appointment.html">Book an appointment</a></p>
+
+    <script>
+        var loginForm = document.getElementById("loginForm");
+        var loginMessage = document.getElementById("formMessage");
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var user = document.getElementById("username").value.trim();
+            var pass = document.getElementById("password").value;
+            if (user === "" || pass === "") {
+                loginMessage.className = "validation-message error";
+                loginMessage.textContent = "Please enter both your username and password.";
+                return;
+            }
+            loginMessage.className = "validation-message success";
+            loginMessage.textContent = "Login details look fine. This practice page does not send or save your data.";
+        });
+        loginForm.addEventListener("reset", function () {
+            loginMessage.className = "validation-message";
+            loginMessage.textContent = "";
+        });
+    </script>
+    <script src="../js/site.js"></script>
+</body>
+</html>

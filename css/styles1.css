@@ -1,0 +1,14 @@
+body { margin: 0px; font-family: Roboto, Arial, sans-serif; color: #18352d; background: #fffdf4; }
+header { padding: 30px 15px 10px; text-align: center; }
+header h1 { margin-bottom: 8px; font-size: 36px; }
+.subtitle { margin-top: 0px; color: #557267; }
+main { width: 92%; max-width: 1000px; margin: 0px auto; }
+.intro, .notice { padding: 15px 20px; background: #e8f1d4; border: 2px solid #18352d; border-radius: 12px; }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.product-card { padding: 15px; background: #f4e6a2; border: 2px solid #18352d; border-radius: 12px; }
+.product-card h3 { margin-top: 0px; }
+.tag { display: inline-block; padding: 3px 10px; font-size: 12px; font-weight: bold; letter-spacing: 1px; color: #fffdf4; background: #18352d; border-radius: 6px; }
+.price { font-size: 22px; font-weight: bold; }
+.highlight { font-weight: bold; background: #e8cf69; }
+footer { margin-top: 30px; padding: 15px; text-align: center; color: #fffdf4; background: #18352d; }
+@media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } }

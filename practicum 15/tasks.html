@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriHive - Task Manager</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0px;
+            font: 16px Arial, sans-serif;
+            color: #18352d;
+            background: #fffdf4;
+        }
+
+        nav {
+            position: sticky;
+            top: 0px;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            margin: 12px;
+            padding: 4px 8px;
+            background: #f4e6a2;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #18352d;
+            text-decoration: none;
+        }
+
+        nav a:hover, nav a:focus {
+            background: #e8cf69;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-label::after {
+            content: " ▾";
+            font-size: 12px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 38px;
+            left: 0px;
+            min-width: 140px;
+            flex-direction: column;
+            background: #f4e6a2;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            white-space: nowrap;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: flex;
+        }
+
+        .appointment {
+            margin-left: auto;
+        }
+
+        .page-heading {
+            margin: 35px 15px 25px;
+            text-align: center;
+        }
+
+        .page-heading h1 {
+            margin-bottom: 8px;
+            font-size: 36px;
+        }
+
+        .page-heading p {
+            margin-top: 0px;
+        }
+
+        .page-heading .small-heading {
+            color: #557267;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        hr {
+            border: 1px solid #e8cf69;
+        }
+
+        .task-manager {
+            width: 92%;
+            max-width: 900px;
+            margin: 30px auto 50px;
+        }
+
+        .task-panel {
+            margin-bottom: 24px;
+            padding: 22px;
+            background: #f4e6a2;
+            border: 2px solid #18352d;
+            border-radius: 12px;
+        }
+
+        .task-panel h2 {
+            margin-top: 0px;
+        }
+
+        .task-form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex: 1 1 180px;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            font: inherit;
+            color: #18352d;
+            background: #fffdf4;
+            border: 1px solid #18352d;
+            border-radius: 6px;
+        }
+
+        input:focus, select:focus {
+            outline: 3px solid #e8cf69;
+            outline-offset: 1px;
+        }
+
+        .form-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        button {
+            padding: 10px 16px;
+            font: inherit;
+            color: #fffdf4;
+            background: #18352d;
+            border: 0px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        button:hover, button:focus {
+            background: #2c5a4b;
+        }
+
+        #cancelButton {
+            display: none;
+            color: #18352d;
+            background: #e8cf69;
+        }
+
+        #formMessage {
+            min-height: 20px;
+            margin-bottom: 0px;
+        }
+
+        .tasks-heading {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .tasks-heading h2 {
+            margin: 0px;
+        }
+
+        #taskSummary {
+            color: #557267;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .task-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 15px;
+            background: #e8f1d4;
+            border: 1px solid #18352d;
+            border-radius: 9px;
+        }
+
+        .task-details h3 {
+            margin: 0px 0px 7px;
+            overflow-wrap: anywhere;
+        }
+
+        .task-details p {
+            margin: 0px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.65;
+        }
+
+        .priority {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 3px 8px;
+            color: #18352d;
+            background: #f4e6a2;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+
+        .task-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .task-buttons button {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+        .task-buttons .delete-button {
+            color: #ffffff;
+            background: #821919;
+        }
+
+        .empty-message {
+            padding: 22px;
+            text-align: center;
+            background: #fffdf4;
+            border: 1px dashed #18352d;
+            border-radius: 8px;
+        }
+
+        .save-note {
+            margin-top: 18px;
+            color: #557267;
+            text-align: center;
+        }
+
+        footer {
+            padding: 16px;
+            color: #fffdf4;
+            background: #18352d;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                margin: 8px;
+                padding: 4px;
+            }
+
+            .appointment {
+                margin-left: 0px;
+            }
+
+            .page-heading h1 {
+                font-size: 30px;
+            }
+
+            .task-manager {
+                width: 94%;
+            }
+
+            .task-panel {
+                padding: 16px;
+            }
+
+            .task-card {
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <a href="../practicum%2014/index.html#home">Home</a>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#podcast">Nutrition Resources</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#podcast">Diet Tips Audio</a>
+                <a href="../practicum%2014/index.html#video">Recipe Video</a>
+                <a href="../practicum%2014/index.html#chart">Diet Chart</a>
+                <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#business">Business</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#business">Business Inquiries</a>
+                <a href="../practicum%2014/index.html#partnerships">Partnership Opportunities</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#advertise">Advertising</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#advertise">Advertise With Us</a>
+                <a href="../practicum%2014/index.html#sponsorship">Sponsorships</a>
+            </div>
+        </div>
+        <a href="../practicum%2014/index.html#quiz">Quiz</a>
+        <a href="../practicum%2014/index.html#location">Clinic</a>
+        <a href="../practicum%2012/dashboard.html">Dashboard</a>
+        <a href="../practicum%2015/tasks.html">Tasks</a>
+        <a href="../practicum%208/gallery.html">Gallery</a>
+        <a class="appointment" href="../practicum%2011/appointment.html">Book Appointment</a>
+        <a class="login" href="../practicum%2011/login.html">Log In</a>
+        <button class="mode-toggle" type="button" onclick="Mode()" aria-pressed="false">Dark Mode</button>
+    </nav>
+
+    <header class="page-heading">
+        <p class="small-heading">NutriHive Wellness</p>
+        <h1>Task Manager</h1>
+        <p>Plan your day and keep track of the little things.</p>
+    </header>
+
+    <hr>
+
+    <main class="task-manager">
+        <section class="task-panel">
+            <h2 id="formHeading">Add a Task</h2>
+            <form id="taskForm">
+                <div class="task-form-row">
+                    <div class="form-group">
+                        <label for="taskInput">Task:</label>
+                        <input type="text" id="taskInput" maxlength="100" placeholder="For example: Walk for 30 minutes">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dueDate">Due date (optional):</label>
+                        <input type="date" id="dueDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority:</label>
+                        <select id="priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" id="addButton">Add Task</button>
+                    <button type="button" id="cancelButton" onclick="cancelEdit()">Cancel Edit</button>
+                </div>
+                <p id="formMessage" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="task-panel">
+            <div class="tasks-heading">
+                <h2>Your Tasks</h2>
+                <p id="taskSummary" aria-live="polite"></p>
+            </div>
+            <div id="taskList" class="task-list"></div>
+            <p class="save-note">Your tasks are saved in this browser and will be here when you come back.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>NutriHive - A healthier day, one task at a time.</p>
+    </footer>
+
+    <script>
+        var tasks = [];
+        var editingIndex = -1;
+        var savedTasks = localStorage.getItem("nutriHiveTasks");
+        if (savedTasks !== null) {
+            tasks = JSON.parse(savedTasks);
+        }
+
+        document.getElementById("taskForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            addTask();
+        });
+        function addTask() {
+            var taskName = document.getElementById("taskInput").value.trim();
+            var dueDate = document.getElementById("dueDate").value;
+            var priority = document.getElementById("priority").value;
+            var formMessage = document.getElementById("formMessage");
+
+            if (taskName === "") {
+                formMessage.textContent = "Please enter a task name.";
+                document.getElementById("taskInput").focus();
+                return;
+            }
+
+            if (editingIndex === -1) {
+                var newTask = {
+                    name: taskName,
+                    dueDate: dueDate,
+                    priority: priority,
+                    completed: false
+                };
+                tasks.push(newTask);
+                formMessage.textContent = "Task added.";
+            } else {
+                tasks[editingIndex].name = taskName;
+                tasks[editingIndex].dueDate = dueDate;
+                tasks[editingIndex].priority = priority;
+                editingIndex = -1;
+                document.getElementById("addButton").textContent = "Add Task";
+                document.getElementById("formHeading").textContent = "Add a Task";
+                document.getElementById("cancelButton").style.display = "none";
+                formMessage.textContent = "Task updated.";
+            }
+
+            document.getElementById("taskInput").value = "";
+            document.getElementById("dueDate").value = "";
+            document.getElementById("priority").value = "Medium";
+
+            saveTasks();
+            showTasks();
+        }
+        function showTasks() {
+            var taskList = document.getElementById("taskList");
+            var taskSummary = document.getElementById("taskSummary");
+            var completedCount = 0;
+
+            taskList.innerHTML = "";
+
+            if (tasks.length === 0) {
+                var emptyMessage = document.createElement("p");
+                emptyMessage.className = "empty-message";
+                emptyMessage.textContent = "No tasks yet. Add your first task above.";
+                taskList.appendChild(emptyMessage);
+                taskSummary.textContent = "0 tasks";
+                return;
+            }
+
+            for (var i = 0; i < tasks.length; i++) {
+                var taskCard = document.createElement("div");
+                taskCard.className = "task-card";
+
+                var taskDetails = document.createElement("div");
+                taskDetails.className = "task-details";
+
+                var taskTitle = document.createElement("h3");
+                taskTitle.textContent = tasks[i].name;
+                if (tasks[i].completed === true) {
+                    taskTitle.className = "completed";
+                    completedCount++;
+                }
+
+                var taskInfo = document.createElement("p");
+                if (tasks[i].dueDate === "") {
+                    taskInfo.textContent = "No due date";
+                } else {
+                    taskInfo.textContent = "Due: " + tasks[i].dueDate;
+                }
+
+                var priorityLabel = document.createElement("span");
+                priorityLabel.className = "priority";
+                priorityLabel.textContent = "Priority: " + tasks[i].priority;
+                taskInfo.appendChild(priorityLabel);
+
+                taskDetails.appendChild(taskTitle);
+                taskDetails.appendChild(taskInfo);
+
+                var taskButtons = document.createElement("div");
+                taskButtons.className = "task-buttons";
+
+                var completeButton = document.createElement("button");
+                completeButton.type = "button";
+                if (tasks[i].completed === true) {
+                    completeButton.textContent = "Undo";
+                } else {
+                    completeButton.textContent = "Complete";
+                }
+                completeButton.setAttribute("onclick", "toggleTask(" + i + ")");
+
+                var editButton = document.createElement("button");
+                editButton.type = "button";
+                editButton.textContent = "Edit";
+                editButton.setAttribute("onclick", "editTask(" + i + ")");
+
+                var deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.className = "delete-button";
+                deleteButton.textContent = "Delete";
+                deleteButton.setAttribute("onclick", "deleteTask(" + i + ")");
+
+                taskButtons.appendChild(completeButton);
+                taskButtons.appendChild(editButton);
+                taskButtons.appendChild(deleteButton);
+
+                taskCard.appendChild(taskDetails);
+                taskCard.appendChild(taskButtons);
+                taskList.appendChild(taskCard);
+            }
+
+            taskSummary.textContent = tasks.length + " tasks | " + completedCount + " completed";
+        }
+        function editTask(index) {
+            document.getElementById("taskInput").value = tasks[index].name;
+            document.getElementById("dueDate").value = tasks[index].dueDate;
+            document.getElementById("priority").value = tasks[index].priority;
+            document.getElementById("addButton").textContent = "Update Task";
+            document.getElementById("formHeading").textContent = "Edit a Task";
+            document.getElementById("cancelButton").style.display = "inline-block";
+            document.getElementById("formMessage").textContent = "Change the details and click Update Task.";
+            editingIndex = index;
+            document.getElementById("taskInput").focus();
+        }
+        function cancelEdit() {
+            editingIndex = -1;
+            document.getElementById("taskInput").value = "";
+            document.getElementById("dueDate").value = "";
+            document.getElementById("priority").value = "Medium";
+            document.getElementById("addButton").textContent = "Add Task";
+            document.getElementById("formHeading").textContent = "Add a Task";
+            document.getElementById("cancelButton").style.display = "none";
+            document.getElementById("formMessage").textContent = "Edit cancelled.";
+        }
+        function toggleTask(index) {
+            if (tasks[index].completed === true) {
+                tasks[index].completed = false;
+            } else {
+                tasks[index].completed = true;
+            }
+
+            saveTasks();
+            showTasks();
+        }
+        function deleteTask(index) {
+            var answer = confirm("Do you want to delete this task?");
+            if (answer === true) {
+                tasks.splice(index, 1);
+
+                if (editingIndex === index) {
+                    cancelEdit();
+                } else if (editingIndex > index) {
+                    editingIndex--;
+                }
+
+                saveTasks();
+                showTasks();
+            }
+        }
+        function saveTasks() {
+            localStorage.setItem("nutriHiveTasks", JSON.stringify(tasks));
+        }
+        showTasks();
+    </script>
+    <script src="../js/site.js"></script>
+</body>
+</html>

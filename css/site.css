@@ -1,0 +1,38 @@
+html { scroll-padding-top: 80px; scroll-behavior: smooth; }
+body { transition: background-color 0.3s ease, color 0.3s ease; }
+nav { position: sticky; top: 0px; z-index: 100; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 12px; padding: 4px 8px; background: #f4e6a2; border-radius: 12px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); animation: slideDown 0.5s ease; }
+@keyframes slideDown { from { translate: 0px -50px; opacity: 0; } to { translate: 0px 0px; opacity: 1; } }
+nav a { display: block; padding: 10px 14px; border-radius: 8px; color: #18352d; text-decoration: none; transition: background-color 0.3s ease, translate 0.3s ease; }
+nav a:hover, nav a:focus { background: #e8cf69; translate: 0px -2px; }
+nav a[aria-current="page"] { background: #e8cf69; }
+.dropdown { position: relative; }
+.dropdown-label::after { content: " ▼"; font-size: 12px; }
+.dropdown-menu { display: flex; position: absolute; top: 38px; left: 0px; min-width: 160px; flex-direction: column; background: #f4e6a2; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0,0,0,0.15); z-index: 1; opacity: 0; visibility: hidden; translate: 0px -8px; pointer-events: none; transition: opacity 0.25s ease, translate 0.25s ease, visibility 0.25s ease; }
+.dropdown-menu a { white-space: nowrap; }
+.dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu { opacity: 1; visibility: visible; translate: 0px 0px; pointer-events: auto; }
+nav .appointment { margin-left: auto; }
+nav .mode-toggle { padding: 10px 14px; color: #fffdf4; background: #18352d; border: 0px; border-radius: 8px; font: inherit; cursor: pointer; }
+nav .mode-toggle:hover { background: #2c5a4b; }
+@media (max-width: 520px) { nav { margin: 8px; padding: 4px; } nav .appointment { margin-left: 0px; } }
+h1 { animation: fadeUp 1s ease; }
+@keyframes fadeUp { from { opacity: 0; translate: 0px 20px; } to { opacity: 1; translate: 0px 0px; } }
+main section { animation: fadeIn 0.8s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+body.dark { background: #10211b; color: #fff8dd; }
+.dark nav, .dark .dropdown-menu { background: #283a30; }
+.dark nav a { color: #fff8dd; }
+.dark nav a:hover, .dark nav a:focus, .dark nav a[aria-current="page"] { background: #405247; }
+.dark nav .mode-toggle { color: #18352d; background: #b89e3e; }
+.dark a { color: #e8cf69; }
+.dark hr { border-color: #8d7933; }
+.dark audio { color-scheme: dark; }
+.dark .form-box, .dark .quiz-box, .dark .info-box, .dark .task-panel, .dark .box, .dark .item, .dark .product-card, .dark .task-card, .dark .empty-message, .dark .priority, .dark .intro, .dark .notice, .dark figure { background: #283a30; color: #fff8dd; border-color: #8d7933; }
+.dark input, .dark select, .dark textarea, .dark .quiz-option { color: #fff8dd; background: #10211b; border-color: #8d7933; }
+.dark #questionNumber { color: #e8cf69; }
+.dark .validation-message.success { color: #fff8dd; background: #283a30; border-color: #8d7933; }
+.dark .validation-message.error { color: #ffb4b4; background: #3a1f1f; border-color: #ffb4b4; }
+.dark .dashboard { border-color: #8d7933; }
+.dark .meals, .dark .tasks { background: #283a30; }
+.dark .water, .dark .appointment-box { background: #1d2e26; }
+.dark .meal-form button { color: #18352d; background: #b89e3e; border-color: #b89e3e; }
+.dark .book-btn { color: #18352d; background: #b89e3e; }

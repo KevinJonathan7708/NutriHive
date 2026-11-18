@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriHive - Healthy Meal Gallery</title>
+    <style>
+        body { margin: 0px; font: 16px Arial, sans-serif; color: #18352d; background: #fffdf4; }
+        h1, .intro { text-align: center; }
+        hr { border: 1px solid #e8cf69; }
+        .gallery { display: grid; grid-template-columns: 300px 300px 300px; justify-content: center; gap: 16px; margin: 20px auto 40px; padding: 0px 20px; }
+        .item { margin: 0px; background: #f4e6a2; border: 2px solid #18352d; border-radius: 12px; overflow: hidden; }
+        .item img { display: block; width: 100%; height: auto; }
+        .item figcaption { padding: 10px; text-align: center; }
+        .lightbox { display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 200; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,.85); }
+        .lightbox:target { display: flex; }
+        .lightbox img { width: 90%; height: 75%; object-fit: contain; border: 3px solid #e8cf69; border-radius: 12px; }
+        .lightbox p { color: #fffdf4; }
+        .buttons { display: flex; gap: 10px; }
+        .buttons a { padding: 10px 20px; color: #18352d; background: #e8cf69; text-decoration: none; }
+        .buttons a:hover, .buttons a:focus { background: #fffdf4; }
+        @media (max-width: 992px) { .gallery { grid-template-columns: 300px 300px; } }
+        @media (max-width: 650px) { .gallery { grid-template-columns: 300px; } }
+        @media (max-width: 360px) { .gallery { grid-template-columns: 260px; } }
+    </style>
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <a href="../practicum%2014/index.html#home">Home</a>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#podcast">Nutrition Resources</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#podcast">Diet Tips Audio</a>
+                <a href="../practicum%2014/index.html#video">Recipe Video</a>
+                <a href="../practicum%2014/index.html#chart">Diet Chart</a>
+                <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#business">Business</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#business">Business Inquiries</a>
+                <a href="../practicum%2014/index.html#partnerships">Partnership Opportunities</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a class="dropdown-label" href="../practicum%2014/index.html#advertise">Advertising</a>
+            <div class="dropdown-menu">
+                <a href="../practicum%2014/index.html#advertise">Advertise With Us</a>
+                <a href="../practicum%2014/index.html#sponsorship">Sponsorships</a>
+            </div>
+        </div>
+        <a href="../practicum%2014/index.html#quiz">Quiz</a>
+        <a href="../practicum%2014/index.html#location">Clinic</a>
+        <a href="../practicum%2012/dashboard.html">Dashboard</a>
+        <a href="../practicum%2015/tasks.html">Tasks</a>
+        <a href="../practicum%208/gallery.html">Gallery</a>
+        <a class="appointment" href="../practicum%2011/appointment.html">Book Appointment</a>
+        <a class="login" href="../practicum%2011/login.html">Log In</a>
+        <button class="mode-toggle" type="button" onclick="Mode()" aria-pressed="false">Dark Mode</button>
+    </nav>
+
+
+    <h1>NutriHive Healthy Meal Gallery</h1>
+    <p class="intro">Click on a picture to see it bigger.</p>
+    <hr>
+
+    <div class="gallery" id="gallery">
+        <figure class="item">
+            <a href="#img1">
+                <img src="../images/thumbs/1.jpg" alt="Meal prep box with sliced chicken, bacon, avocado, cherry tomatoes, cucumber and a boiled egg">
+            </a>
+            <figcaption>Chicken Cobb Meal Prep Box</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img2">
+                <img src="../images/thumbs/2.jpg" alt="Bowl of grilled chicken slices with lettuce, carrots, cucumber, avocado and cherry tomatoes">
+            </a>
+            <figcaption>Grilled Chicken Salad Bowl</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img3">
+                <img src="../images/thumbs/3.jpg" alt="Greek salad with chicken, feta cheese, olives, tomatoes and cucumber">
+            </a>
+            <figcaption>Greek Chicken Salad</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img4">
+                <img src="../images/thumbs/4.jpg" alt="Bowl of chicken strips with black beans, corn, coriander and a lime wedge">
+            </a>
+            <figcaption>Chicken and Bean Bowl</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img5">
+                <img src="../images/thumbs/5.jpg" alt="Salad of chicken, mango, avocado, tomato and cucumber">
+            </a>
+            <figcaption>Chicken Mango Salad</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img6">
+                <img src="../images/thumbs/6.jpg" alt="Pasta salad with artichoke, red pepper, tomato and spring onion">
+            </a>
+            <figcaption>Veggie Pasta Salad</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img7">
+                <img src="../images/thumbs/7.jpg" alt="Glass bowl of spinach with orange slices, pomegranate seeds, pecans and feta">
+            </a>
+            <figcaption>Spinach Orange Salad</figcaption>
+        </figure>
+
+        <figure class="item">
+            <a href="#img8">
+                <img src="../images/thumbs/8.jpg" alt="Mixed salad with lettuce, cucumber, cherry tomatoes, carrots and peppers">
+            </a>
+            <figcaption>Fresh Garden Salad</figcaption>
+        </figure>
+    </div>
+
+    <div class="lightbox" id="img1">
+        <img src="../images/full/1.jpg" alt="Meal prep box with sliced chicken, bacon, avocado, cherry tomatoes, cucumber and a boiled egg">
+        <p>Chicken Cobb Meal Prep Box</p>
+        <div class="buttons">
+            <a href="#img8">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img2">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img2">
+        <img src="../images/full/2.jpg" alt="Bowl of grilled chicken slices with lettuce, carrots, cucumber, avocado and cherry tomatoes">
+        <p>Grilled Chicken Salad Bowl</p>
+        <div class="buttons">
+            <a href="#img1">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img3">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img3">
+        <img src="../images/full/3.jpg" alt="Greek salad with chicken, feta cheese, olives, tomatoes and cucumber">
+        <p>Greek Chicken Salad</p>
+        <div class="buttons">
+            <a href="#img2">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img4">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img4">
+        <img src="../images/full/4.jpg" alt="Bowl of chicken strips with black beans, corn, coriander and a lime wedge">
+        <p>Chicken and Bean Bowl</p>
+        <div class="buttons">
+            <a href="#img3">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img5">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img5">
+        <img src="../images/full/5.jpg" alt="Salad of chicken, mango, avocado, tomato and cucumber">
+        <p>Chicken Mango Salad</p>
+        <div class="buttons">
+            <a href="#img4">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img6">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img6">
+        <img src="../images/full/6.jpg" alt="Pasta salad with artichoke, red pepper, tomato and spring onion">
+        <p>Veggie Pasta Salad</p>
+        <div class="buttons">
+            <a href="#img5">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img7">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img7">
+        <img src="../images/full/7.jpg" alt="Glass bowl of spinach with orange slices, pomegranate seeds, pecans and feta">
+        <p>Spinach Orange Salad</p>
+        <div class="buttons">
+            <a href="#img6">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img8">Next</a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="img8">
+        <img src="../images/full/8.jpg" alt="Mixed salad with lettuce, cucumber, cherry tomatoes, carrots and peppers">
+        <p>Fresh Garden Salad</p>
+        <div class="buttons">
+            <a href="#img7">Previous</a>
+            <a href="#gallery">Close</a>
+            <a href="#img1">Next</a>
+        </div>
+    </div>
+    <script src="../js/site.js"></script>
+</body>
+</html>
