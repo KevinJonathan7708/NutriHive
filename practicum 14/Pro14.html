@@ -104,6 +104,14 @@
             accent-color: black;
         }
 
+        .mode-toggle {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            font: inherit;
+            cursor: pointer;
+        }
+
         .quiz-box {
             width: 90%;
             max-width: 650px;
@@ -159,46 +167,51 @@
             text-align: center;
         }
 
+        .current-time { margin: 8px 0px 16px; font-size: 18px; font-weight: bold; }
+        main img:hover { scale: 1.05; }
+        main img { transition: scale 0.3s ease; }
+        .info-box { width: 90%; max-width: 650px; margin: 10px auto 20px auto; padding: 15px; text-align: center; background: #f4e6a2; border: 2px solid #18352d; border-radius: 12px; }
     </style>
     <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
     <nav aria-label="Main navigation">
-        <a href="../practicum%2014/index.html#home">Home</a>
+        <a href="../practicum%2014/Pro14.html#home">Home</a>
         <div class="dropdown">
-            <a class="dropdown-label" href="../practicum%2014/index.html#podcast">Nutrition Resources</a>
+            <a class="dropdown-label" href="../practicum%2014/Pro14.html#podcast">Nutrition Resources</a>
             <div class="dropdown-menu">
-                <a href="../practicum%2014/index.html#podcast">Diet Tips Audio</a>
-                <a href="../practicum%2014/index.html#video">Recipe Video</a>
-                <a href="../practicum%2014/index.html#chart">Diet Chart</a>
+                <a href="../practicum%2014/Pro14.html#podcast">Diet Tips Audio</a>
+                <a href="../practicum%2014/Pro14.html#video">Recipe Video</a>
+                <a href="../practicum%2014/Pro14.html#chart">Diet Chart</a>
                 <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a>
             </div>
         </div>
         <div class="dropdown">
-            <a class="dropdown-label" href="../practicum%2014/index.html#business">Business</a>
+            <a class="dropdown-label" href="../practicum%2014/Pro14.html#business">Business</a>
             <div class="dropdown-menu">
-                <a href="../practicum%2014/index.html#business">Business Inquiries</a>
-                <a href="../practicum%2014/index.html#partnerships">Partnership Opportunities</a>
+                <a href="../practicum%2014/Pro14.html#business">Business Inquiries</a>
+                <a href="../practicum%2014/Pro14.html#partnerships">Partnership Opportunities</a>
             </div>
         </div>
         <div class="dropdown">
-            <a class="dropdown-label" href="../practicum%2014/index.html#advertise">Advertising</a>
+            <a class="dropdown-label" href="../practicum%2014/Pro14.html#advertise">Advertising</a>
             <div class="dropdown-menu">
-                <a href="../practicum%2014/index.html#advertise">Advertise With Us</a>
-                <a href="../practicum%2014/index.html#sponsorship">Sponsorships</a>
+                <a href="../practicum%2014/Pro14.html#advertise">Advertise With Us</a>
+                <a href="../practicum%2014/Pro14.html#sponsorship">Sponsorships</a>
             </div>
         </div>
-        <a href="../practicum%2014/index.html#quiz">Quiz</a>
-        <a href="../practicum%2014/index.html#location">Clinic</a>
-        <a href="../practicum%2012/dashboard.html">Dashboard</a>
-        <a href="../practicum%2015/tasks.html">Tasks</a>
-        <a href="../practicum%208/gallery.html">Gallery</a>
-        <a class="appointment" href="../practicum%2011/appointment.html">Book Appointment</a>
-        <a class="login" href="../practicum%2011/login.html">Log In</a>
+        <a href="../practicum%2014/Pro14.html#quiz">Quiz</a>
+        <a href="../practicum%2014/Pro14.html#location">Clinic</a>
+        <a href="../practicum%2012/Pro12.html">Dashboard</a>
+        <a href="../practicum%2015/Pro15.html">Tasks</a>
+        <a href="../practicum%208/Pro8.html">Gallery</a>
+        <a class="appointment" href="../practicum%2011/Pro11.html">Book Appointment</a>
+        <a class="login" href="../practicum%2011/Pro11_LOGIN.html">Log In</a>
         <button class="mode-toggle" type="button" onclick="Mode()" aria-pressed="false">Dark Mode</button>
     </nav>
     <center>
         <h1>NutriHive: Your Personalized Diet Manager</h1>
+        <p class="current-time">Current time: <time id="time"></time></p>
     </center>
     <hr>
     <main>
@@ -262,15 +275,52 @@
             </div>
         </section>
         <hr>
+        <section id="business">
+            <center>
+                <h2><u>Business</u></h2>
+                <div class="info-box">
+                    <h3>Business Inquiries</h3>
+                    <p>Clinics and wellness centres can order certified plans in bulk. See our <a href="../practicum%204/Pro4.html">Plans &amp; Programs</a> for prices.</p>
+                    <h3 id="partnerships">Partnership Opportunities</h3>
+                    <p>We partner with gyms, hospitals and local kitchens to bring healthy eating to more people.</p>
+                </div>
+            </center>
+        </section>
+        <hr>
+        <section id="advertise">
+            <center>
+                <h2><u>Advertising</u></h2>
+                <div class="info-box">
+                    <h3>Advertise With Us</h3>
+                    <p>Reach people who care about healthy eating through our website and newsletter.</p>
+                    <h3 id="sponsorship">Sponsorships</h3>
+                    <p>Sponsor a recipe video or a Daily Health Tips episode and support our nutrition programmes.</p>
+                </div>
+            </center>
+        </section>
+        <hr>
         <section id="location">
             <center>
                 <h2><u>Visit our Clinic</u></h2>
                 <p>For a Personalized Nutrition Consultation.</p>
-                <p><a href="../practicum%2011/appointment.html">Book an Appointment</a></p>
+                <p><a href="../practicum%2011/Pro11.html">Book an Appointment</a></p>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15664.12071854128!2d76.7588!3d10.9998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba84b0000000001%3A0x0!2sMadawarayapuram%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" width="600" height="300" frameborder="0" allowfullscreen></iframe>
             </center>
         </section>
     </main>
+    <script src="../js/site.js"></script>
+    <script>
+        function showTime() {
+            var now = new Date();
+            var hours = String(now.getHours()).padStart(2, "0");
+            var minutes = String(now.getMinutes()).padStart(2, "0");
+            var seconds = String(now.getSeconds()).padStart(2, "0");
+            document.getElementById("time").textContent = hours + ":" + minutes + ":" + seconds;
+        }
+
+        showTime();
+        setInterval(showTime, 1000);
+    </script>
     <script>
         var questions = [
             {
@@ -366,6 +416,5 @@
         }
         showQuestion();
     </script>
-    <script src="../js/site.js"></script>
 </body>
 </html>
