@@ -2,10 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=practicum%2014/index.html">
-    <title>NutriHive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#173b30">
+    <meta name="description" content="Open any of the 15 NutriHive web technology practicums.">
+    <title>NutriHive | Practicum Directory</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --green: #173b30;
+            --green-soft: #e6eee9;
+            --gold: #e7c85d;
+            --ink: #20342d;
+            --muted: #617168;
+            --paper: #f7f8f3;
+            --white: #fff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .hero {
+            padding: 56px 24px 46px;
+            color: var(--white);
+            background: var(--green);
+            border-bottom: 6px solid var(--gold);
+        }
+
+        .hero-inner, main, footer {
+            width: min(100% - 40px, 1080px);
+            margin-inline: auto;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 34px;
+            aspect-ratio: 1;
+            place-items: center;
+            color: var(--green);
+            background: var(--gold);
+            border-radius: 50%;
+            font-size: 1.1rem;
+            letter-spacing: 0;
+        }
+
+        h1 {
+            max-width: 720px;
+            margin: 0;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.08;
+        }
+
+        .hero p {
+            max-width: 620px;
+            margin: 16px 0 0;
+            color: #d7e3dc;
+            font-size: 1.08rem;
+            line-height: 1.65;
+        }
+
+        main { padding-block: 38px 56px; }
+
+        .section-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        h2 { margin: 0; font-size: 1.35rem; }
+
+        .count {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .practicum-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .practicum-link {
+            display: flex;
+            min-height: 104px;
+            align-items: center;
+            gap: 16px;
+            padding: 18px;
+            color: var(--ink);
+            background: var(--white);
+            border: 1px solid #dce5df;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgb(23 59 48 / 5%);
+            text-decoration: none;
+            transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+
+        .practicum-link:hover {
+            transform: translateY(-3px);
+            border-color: #a9c2b3;
+            box-shadow: 0 10px 22px rgb(23 59 48 / 11%);
+        }
+
+        .practicum-link:focus-visible {
+            outline: 3px solid #b08d19;
+            outline-offset: 3px;
+        }
+
+        .number {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            flex: 0 0 48px;
+            place-items: center;
+            color: var(--green);
+            background: var(--green-soft);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .link-copy { display: grid; gap: 4px; }
+        .link-copy strong { font-size: 1rem; }
+        .link-copy span { color: var(--muted); font-size: 0.88rem; }
+        .arrow { margin-left: auto; color: var(--green); font-size: 1.2rem; }
+
+        footer {
+            padding-block: 18px 28px;
+            color: var(--muted);
+            border-top: 1px solid #dce5df;
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 760px) {
+            .practicum-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hero { padding-top: 42px; }
+        }
+
+        @media (max-width: 500px) {
+            .hero-inner, main, footer { width: min(100% - 28px, 1080px); }
+            .hero { padding: 34px 0 32px; }
+            .practicum-grid { grid-template-columns: 1fr; gap: 10px; }
+            .practicum-link { min-height: 86px; }
+            .section-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
+        }
+    </style>
 </head>
 <body>
-    <p><a href="practicum%2014/index.html">Open NutriHive</a></p>
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="brand"><span class="brand-mark" aria-hidden="true">N</span> NutriHive</div>
+            <h1>Web Technology Practicums</h1>
+            <p>Choose a practicum below to open its project directly.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-heading">
+            <h2>All practicums</h2>
+            <span class="count">15 projects</span>
+        </div>
+        <nav class="practicum-grid" aria-label="Practicum projects">
+            <a class="practicum-link" href="practicum%201/index.html"><span class="number">01</span><span class="link-copy"><strong>Practicum 1</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%202/Pro2.html"><span class="number">02</span><span class="link-copy"><strong>Practicum 2</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%203/Pro3.html"><span class="number">03</span><span class="link-copy"><strong>Practicum 3</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%204/Pro4.html"><span class="number">04</span><span class="link-copy"><strong>Practicum 4</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%205/Pro5.html"><span class="number">05</span><span class="link-copy"><strong>Practicum 5</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%206/positioning.html"><span class="number">06</span><span class="link-copy"><strong>Practicum 6</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%207/Pro7.html"><span class="number">07</span><span class="link-copy"><strong>Practicum 7</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%208/gallery.html"><span class="number">08</span><span class="link-copy"><strong>Practicum 8</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%209/index.html"><span class="number">09</span><span class="link-copy"><strong>Practicum 9</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2010/clock.html"><span class="number">10</span><span class="link-copy"><strong>Practicum 10</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2011/appointment.html"><span class="number">11</span><span class="link-copy"><strong>Practicum 11</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2012/dashboard.html"><span class="number">12</span><span class="link-copy"><strong>Practicum 12</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2013/quiz.html"><span class="number">13</span><span class="link-copy"><strong>Practicum 13</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2014/index.html"><span class="number">14</span><span class="link-copy"><strong>Practicum 14</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="practicum-link" href="practicum%2015/tasks.html"><span class="number">15</span><span class="link-copy"><strong>Practicum 15</strong><span>Open project</span></span><span class="arrow" aria-hidden="true">→</span></a>
+        </nav>
+    </main>
+
+    <footer>NutriHive · 25CS208 Web Technology</footer>
 </body>
 </html>
